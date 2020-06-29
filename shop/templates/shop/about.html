@@ -1,0 +1,68 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%} About Us{% endblock %}
+{% block body %}
+
+
+<main role="main">
+
+  <div class="container">
+    <h1 class="display-3 mt-5" style="color: #333;">My Shopping Cart!</h1>
+    <!-- Example row of columns -->
+    <div class="row my-5">
+      <div class="col-md-4 my-5">
+        <h2>About</h2>
+        <p>My Shopping Cart Pvt Ltd. is an Indian electronic commerce company based in Punjab, India. Founded by Suman Loi in 2020.</p>
+        <p><a class="btn btn-secondary" href="/" role="button">View details »</a></p>
+      </div>
+      <div class="col-md-4 my-5">
+        <h2>Products Available</h2>
+        <p>The company initially focused on book sales, before expanding into other product categories such as consumer electronics, fashion etc. </p>
+        <p><a class="btn btn-secondary" href="/" role="button">View details »</a></p>
+      </div>
+      <div class="col-md-4 my-5">
+        <h2>Payment Methods</h2>
+        <p>My Shopping Card also owns PhonePe, a mobile payments service based on the Unified Payments Interface (UPI).</p>
+        <p><a class="btn btn-secondary" href="/" role="button">View details »</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+
+{% block js %}
+<script>
+console.log('working');
+if(localStorage.getItem('cart') == null){
+var cart = {};
+}
+else
+{
+cart = JSON.parse(localStorage.getItem('cart'));
+document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+$('.cart').click(function(){
+console.log('clicked');
+var idstr = this.id.toString();
+console.log(idstr);
+if (cart[idstr] !=undefined){
+cart[idstr] = cart[idstr] + 1;
+}
+else
+{
+cart[idstr] = 1;
+}
+console.log(cart);
+localStorage.setItem('cart', JSON.stringify(cart));
+document.getElementById('cart').innerHTML = Object.keys(cart).length;
+});
+$('#popcart').popover();
+document.getElementById("popcart").setAttribute('data-content', '<h5>Cart for your items in my shopping cart</h5>');
+</script>
+{% endblock %}
+
+
+{% endblock %}
